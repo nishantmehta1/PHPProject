@@ -5,8 +5,11 @@ $logoutQuery = "UPDATE `users` SET status = '{$statusOffline}' WHERE id = '{$_SE
 $runLogoutQuery = mysqli_query($conn, $logoutQuery);
 
 if($runLogoutQuery){
-    session_start();
-    session_unset($_SESSION["id"]);
+    if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
+    //session_unset($_SESSION["id"]);
     session_destroy();
     header("location: ../login.php");
 }
